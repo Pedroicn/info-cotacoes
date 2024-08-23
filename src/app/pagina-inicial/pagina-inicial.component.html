@@ -1,10 +1,62 @@
-<main>
-  <header class="header">
+<main class="mt-3">
 
-  </header>
+  <div class="buttons">
+    <button
+      type="button"
+      class="btn btn-light"
+      (click)="obterCotacoes('', '', '','',categoria, 'stock')"
+      [ngClass]="{ selected: type == 'stock' }"
+    >
+      Ações
+    </button>
+    <button
+      type="button"
+      class="btn btn-light"
+      (click)="obterCotacoes('', '', '','',categoria, 'fund')"
+      [ngClass]="{ selected: type == 'fund' }"
+    >
+      Fundos
+    </button>
+    <button
+      type="button"
+      class="btn btn-light"
+      (click)="obterCotacoes('', '', '','',categoria, 'bdr')"
+      [ngClass]="{ selected: type == 'bdr' }"
+    >
+      BDRs
+    </button>
+  </div>
 
-  <section class="section">
+  <section class="section p-4 shadow-lg p-3 mb-5 bg-body" style="width: 75%; border-radius: 20px">
+<!--    <label>Sector</label>-->
+    <select
+      class="form-select form-select-lg select-category"
+      aria-label="Default select example"
+      (change)="obterCotacoes('', '', '','',categoria, type)"
+      [(ngModel)]="categoria"
+    >
+      <option value="">Select category</option>
+      @for (setor of setores; track setor) {
+        <option value="{{setor}}">{{setor}}</option>
+      }
+    </select>
 
+    <input type="text" placeholder="Buscar ativo" (keyup)="filtrarAcoes()">
+    <div class="box" style="width: 100%">
+
+      @for (acao of acoes; track acao.stock) {
+        <div class="card shadow-lg" style="border-radius: 20px">
+          <img src="{{acao.logo}}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title"><b>Cód.:</b> {{acao.stock}}</h5>
+            <p class="card-text"><b>Nome:</b> {{acao.name}}</p>
+            <p><b>Setor:</b> {{acao.sector}}</p>
+          </div>
+        </div>
+      }
+
+
+    </div>
   </section>
 
 </main>
